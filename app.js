@@ -182,17 +182,6 @@ function initThreeEngine() {
   });
 
   brickMesh = new THREE.Mesh(brickGeo, brickMaterial);
-  
-  const coreGeo = new THREE.BoxGeometry(2.32, 0.08, 0.74);
-  const coreMaterial = new THREE.MeshStandardMaterial({
-    color: 0xE5C158,
-    metalness: 0.95,
-    roughness: 0.1,
-    emissive: 0xD4AF37,
-    emissiveIntensity: 0.15
-  });
-  coreMesh = new THREE.Mesh(coreGeo, coreMaterial);
-  brickMesh.add(coreMesh);
   scene.add(brickMesh);
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.65));
@@ -340,6 +329,7 @@ function updateSpotlightDOM(ed) {
 // ═══════════════════════════════════════════════════════════
 let lScene, lCam, lRen, lBrickMesh, lCoreMesh, debrSystem;
 let gameStagePhase = 0, stageProgressArray = [0, 0, 0], absoluteScore = 0, dynamicCombo = 1, gameCompleteState = false;
+let lastToastedCombo = 0;
 let comboResetTimer = null;
 const labCanvasElement = document.getElementById('lab-canvas-3d');
 
@@ -372,7 +362,7 @@ function initLab3DStage() {
   });
   lBrickMesh = new THREE.Mesh(geo, mat);
 
-  const innerCoreGeo = new THREE.BoxGeometry(1.82, 0.05, 0.57);
+  const innerCoreGeo = new THREE.BoxGeometry(1.78, 0.04, 0.53);
   const innerCoreMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0 });
   lCoreMesh = new THREE.Mesh(innerCoreGeo, innerCoreMat);
   lBrickMesh.add(lCoreMesh);
@@ -505,12 +495,19 @@ function triggerGameProgress(amt) {
 function updateComboMultiplier() {
   dynamicCombo = Math.min(dynamicCombo + 1, 12);
   const comboContainer = document.getElementById('h-combo');
-  comboContainer.textContent = '×' + Math.floor(dynamicCombo / 2 + 1);
+  const multiplierVal = Math.floor(dynamicCombo / 2 + 1);
+  comboContainer.textContent = '×' + multiplierVal;
   comboContainer.style.color = EDITIONS[currentEdition].accent;
-  
+
+  if ([3, 5, 7].includes(multiplierVal) && multiplierVal !== lastToastedCombo) {
+    lastToastedCombo = multiplierVal;
+    spawnToast('✦ ×' + multiplierVal + ' Streak!');
+  }
+
   clearTimeout(comboResetTimer);
   comboResetTimer = setTimeout(() => {
     dynamicCombo = 1;
+    lastToastedCombo = 0;
     comboContainer.textContent = '×1';
     comboContainer.style.color = 'inherit';
   }, 1200);
@@ -586,6 +583,8 @@ function finishLabWorkflow() {
   document.getElementById('lab-instr').textContent = '✦ Matrix Synthesis Complete. Structural token unlocked.';
   document.getElementById('h-heat').textContent = 'OPTIMAL';
   document.getElementById('h-heat').style.color = EDITIONS[currentEdition].accent;
+  spawnToast('✦ Forging Complete');
+  fireConfetti();
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -649,6 +648,8 @@ function handleReserve() {
   sButton.style.border = '1px solid ' + EDITIONS[currentEdition].accent; 
   sButton.style.color = EDITIONS[currentEdition].accent;
   sButton.onclick = null;
+  spawnToast('✦ Allocation Secured');
+  fireConfetti();
 }
 
 const revealObserver = new IntersectionObserver(entries => { 
@@ -690,6 +691,12 @@ window.addEventListener('DOMContentLoaded', () => {
   switchEdition(0);
   hookInteractiveElements();
   document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
+  initPreloader();
+  initScrollProgressAndSpy();
+  initMagneticElements();
+  initCardTilt();
+  initKeyboardNav();
+  initScrollCue();
 
   window.addEventListener('resize', () => {
     if (cam && ren && wrap) {
@@ -698,5 +705,173 @@ window.addEventListener('DOMContentLoaded', () => {
       lCam.aspect = document.getElementById('lab-container-3d').clientWidth / document.getElementById('lab-container-3d').clientHeight; lCam.updateProjectionMatrix();
       lRen.setSize(document.getElementById('lab-container-3d').clientWidth, document.getElementById('lab-container-3d').clientHeight);
     }
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    if (confettiCanvas) { confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
   });
 });
+
+// ═══════════════════════════════════════════════════════════
+// PRELOADER
+// ═══════════════════════════════════════════════════════════
+function initPreloader() {
+  const pre = document.getElementById('preloader');
+  if (!pre) return;
+  const fill = pre.querySelector('.pre-fill');
+  const pct = pre.querySelector('.pre-pct');
+  let p = 0;
+  const tick = setInterval(() => {
+    p = Math.min(p + Math.random() * 18, 100);
+    fill.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p >= 100) {
+      clearInterval(tick);
+      setTimeout(() => pre.classList.add('done'), 250);
+    }
+  }, 110);
+  window.addEventListener('load', () => {
+    p = 100; fill.style.width = '100%'; pct.textContent = '100%';
+    clearInterval(tick);
+    setTimeout(() => pre.classList.add('done'), 300);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// SCROLL PROGRESS BAR + SCROLLSPY NAVIGATION
+// ═══════════════════════════════════════════════════════════
+function initScrollProgressAndSpy() {
+  const fillBar = document.getElementById('scroll-progress-fill');
+  const sections = ['stage', 'spotlight', 'lab', 'collection', 'reserve'].map(id => document.getElementById(id)).filter(Boolean);
+  const navLinks = Array.from(document.querySelectorAll('.nav-lnk'));
+
+  function onScroll() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (fillBar) {
+      fillBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+      fillBar.style.backgroundColor = EDITIONS[currentEdition].accent;
+    }
+
+    let activeId = sections[0]?.id;
+    for (const sec of sections) {
+      if (scrollTop + window.innerHeight * 0.4 >= sec.offsetTop) activeId = sec.id;
+    }
+    navLinks.forEach(l => l.classList.toggle('active-link', l.getAttribute('href') === '#' + activeId));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+// ═══════════════════════════════════════════════════════════
+// SCROLL CUE FADE
+// ═══════════════════════════════════════════════════════════
+function initScrollCue() {
+  const cue = document.getElementById('scroll-cue');
+  if (!cue) return;
+  window.addEventListener('scroll', () => {
+    cue.classList.toggle('hide', window.scrollY > 80);
+  }, { passive: true });
+  cue.addEventListener('click', () => document.getElementById('spotlight').scrollIntoView({ behavior: 'smooth' }));
+}
+
+// ═══════════════════════════════════════════════════════════
+// MAGNETIC BUTTON ATTRACTION
+// ═══════════════════════════════════════════════════════════
+function initMagneticElements() {
+  const targets = document.querySelectorAll('.arr, .claim-cta, .submit-btn, .logo, .ed-cta');
+  targets.forEach(el => {
+    el.classList.add('magnetic');
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const relX = (e.clientX - r.left - r.width / 2) * 0.35;
+      const relY = (e.clientY - r.top - r.height / 2) * 0.35;
+      gsap.to(el, { x: relX, y: relY, duration: 0.3, ease: 'power2.out' });
+    });
+    el.addEventListener('mouseleave', () => {
+      gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// 3D TILT ON COLLECTION CARDS
+// ═══════════════════════════════════════════════════════════
+function initCardTilt() {
+  document.querySelectorAll('.ed-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      gsap.to(card, { rotateY: px * 10, rotateX: -py * 10, duration: 0.4, ease: 'power2.out', overwrite: true });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'power3.out' });
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// KEYBOARD NAVIGATION FOR EDITIONS
+// ═══════════════════════════════════════════════════════════
+function initKeyboardNav() {
+  window.addEventListener('keydown', (e) => {
+    if (window.scrollY > window.innerHeight * 1.2) return;
+    if (e.key === 'ArrowRight') switchEdition((currentEdition + 1) % EDITIONS.length);
+    if (e.key === 'ArrowLeft') switchEdition((currentEdition - 1 + EDITIONS.length) % EDITIONS.length);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// ACHIEVEMENT TOAST SYSTEM
+// ═══════════════════════════════════════════════════════════
+function spawnToast(msg) {
+  const stack = document.getElementById('toast-stack');
+  if (!stack) return;
+  const chip = document.createElement('div');
+  chip.className = 'toast-chip';
+  chip.textContent = msg;
+  chip.style.color = EDITIONS[currentEdition].accent;
+  stack.appendChild(chip);
+  gsap.to(chip, { opacity: 1, x: 0, scale: 1, duration: 0.4, ease: 'back.out(2)' });
+  gsap.to(chip, { opacity: 0, x: 30, duration: 0.4, delay: 2.2, onComplete: () => chip.remove() });
+}
+
+// ═══════════════════════════════════════════════════════════
+// CONFETTI BURST (celebratory micro-interaction)
+// ═══════════════════════════════════════════════════════════
+function fireConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  if (!canvas) return;
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  const accent = EDITIONS[currentEdition].accent;
+  const colors = [accent, '#111115', '#ffffff'];
+  const pieces = Array.from({ length: 70 }, () => ({
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+    vx: (Math.random() - 0.5) * 18,
+    vy: (Math.random() - 1.4) * 18,
+    size: Math.random() * 6 + 3,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    rot: Math.random() * Math.PI,
+    vr: (Math.random() - 0.5) * 0.3,
+    life: 1
+  }));
+
+  (function animateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += 0.4; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save();
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+      ctx.restore();
+    });
+    if (alive) requestAnimationFrame(animateConfetti);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  })();
+}

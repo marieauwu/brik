@@ -14,6 +14,15 @@
 </head>
 <body>
 
+  <div id="preloader">
+    <div class="pre-mark">BRÍK<span>//</span></div>
+    <div class="pre-bar"><div class="pre-fill"></div></div>
+    <div class="pre-pct">0%</div>
+  </div>
+
+  <div id="scroll-progress"><div id="scroll-progress-fill"></div></div>
+  <div id="toast-stack"></div>
+
   <canvas id="cursor-canvas"></canvas>
   <div id="cursor-dot"></div>
   <div id="cursor-ring">
@@ -46,6 +55,7 @@
         <div id="arr-r" class="arr">→</div>
       </div>
     </div>
+    <div id="scroll-cue"><span>Scroll</span><div class="cue-line"></div></div>
   </section>
 
   <section id="spotlight">
@@ -146,6 +156,8 @@
       <span>Structural Core Core V6.12 // Glassmorphism Protocol</span>
     </div>
   </footer>
+
+  <canvas id="confetti-canvas"></canvas>
 
   <script src="app.js"></script>
 </body>
