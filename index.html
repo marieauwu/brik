@@ -30,7 +30,7 @@
   </div>
 
   <header>
-    <a href="#" class="logo">BRÍK<span>//</span></a>
+    <a href="#" class="logo" id="logo-trigger">BRÍK<span>//</span></a>
     <nav>
       <a href="#stage" class="nav-lnk">Archetype</a>
       <a href="#spotlight" class="nav-lnk">Blueprint</a>
@@ -41,6 +41,11 @@
   </header>
 
   <div id="three-wrap"></div>
+  <div id="inspect-hud">
+    <div id="inspect-hint">Drag to orbit</div>
+    <button id="xray-toggle" class="ghost-btn">✕-Ray Reveal</button>
+    <button id="inspect-exit" class="ghost-btn">Exit Inspect</button>
+  </div>
 
   <section id="stage">
     <canvas id="atmo-canvas"></canvas>
@@ -53,6 +58,7 @@
         <div id="arr-l" class="arr">←</div>
         <div id="edition-dots"></div>
         <div id="arr-r" class="arr">→</div>
+        <button id="inspect-toggle" class="inspect-cta">Inspect Brick</button>
       </div>
     </div>
     <div id="scroll-cue"><span>Scroll</span><div class="cue-line"></div></div>
@@ -84,9 +90,15 @@
       </div>
       <div class="lab-dashboard">
         <div id="ptabs">
-          <div class="ptab active" data-ph="0">Chisel Core</div>
-          <div class="ptab" data-ph="1">Micro Polish</div>
-          <div class="ptab" data-ph="2">Fusion Glaze</div>
+          <div class="ptab active" data-ph="0">Temperature</div>
+          <div class="ptab" data-ph="1">Compression</div>
+          <div class="ptab" data-ph="2">Polish</div>
+        </div>
+
+        <div class="temp-slider-wrap">
+          <span class="temp-label">Forge Preview</span>
+          <input type="range" id="forge-temp" min="1000" max="1650" value="1180" />
+          <span id="temp-readout">1180°C</span>
         </div>
         
         <div class="arc-visualizer">
@@ -106,7 +118,7 @@
         <div id="lab-instr">Click directly on the 3D model geometry to chisel raw minerals.</div>
         
         <div id="lab-payoff">
-          <button class="claim-cta" onclick="document.getElementById('reserve').scrollIntoView({behavior:'smooth'})">Claim Allocation Matrix</button>
+          <button class="claim-cta" onclick="document.getElementById('reserve').scrollIntoView({behavior:'smooth'})">Secure Your BRÍK</button>
         </div>
       </div>
     </div>
@@ -119,12 +131,12 @@
 
   <section id="reserve">
     <div class="res-box rv">
-      <h2>RESERVE ALLOCATION</h2>
+      <h2>RESERVE YOUR BRÍK</h2>
       <p>Secure structural integrity units in Phase I production cycles matching exact physical and mineral parameters listed above.</p>
       <div class="form-group">
         <input type="text" id="f-name" placeholder="Full Identity Name" required />
         <input type="email" id="f-email" placeholder="Secure Communications Email" required />
-        <button id="f-submit" class="submit-btn" onclick="handleReserve()">Request Matrix Security Allocation</button>
+        <button id="f-submit" class="submit-btn" onclick="handleReserve()">Secure Your BRÍK</button>
       </div>
     </div>
   </section>
@@ -148,7 +160,7 @@
       <ul>
         <li><a href="#">Security Core</a></li>
         <li><a href="#">Atomic Terms Matrix</a></li>
-        <li><a href="#">Allocation Agreement Protocol</a></li>
+        <li><a href="#">Reservation Agreement Protocol</a></li>
       </ul>
     </div>
     <div class="footer-bottom">
@@ -158,6 +170,35 @@
   </footer>
 
   <canvas id="confetti-canvas"></canvas>
+
+  <div id="unbox-overlay">
+    <div class="unbox-stage">
+      <div class="unbox-lid"></div>
+      <div class="unbox-box">
+        <canvas class="unbox-product" id="unbox-canvas-3d"></canvas>
+      </div>
+      <div class="unbox-copy">
+        <div class="unbox-eyebrow">Reservation Confirmed</div>
+        <h2 id="unbox-title">Your BRÍK Heritage Is Forged</h2>
+        <p>Open to reveal your edition.</p>
+        <div class="unbox-actions">
+          <button id="unbox-trigger" class="claim-cta">Open Your BRÍK</button>
+          <button id="unbox-cert-btn" class="ghost-btn" style="display:none">View Ownership Certificate</button>
+          <button id="unbox-close" class="ghost-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cert-modal">
+    <div class="cert-panel">
+      <canvas id="cert-canvas" width="1000" height="640"></canvas>
+      <div class="cert-actions">
+        <button id="cert-download" class="claim-cta">Download Certificate</button>
+        <button id="cert-close" class="ghost-btn">Close</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
