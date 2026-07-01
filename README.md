@@ -1,68 +1,180 @@
-# 🧱 BRÍK – Luxury Interactive Brick Experience
+# 🧱 BRÍK — Where Earth Meets Luxury
 
-> A premium Apple-inspired interactive product website built with Three.js, GSAP, and Tailwind CSS.
+> **BRÍK** transforms an ordinary construction brick into a premium collectible through cinematic storytelling, immersive 3D interactions, and luxury-inspired design.
 
-BRÍK reimagines an ordinary construction brick as a luxury collectible product through immersive storytelling, cinematic animations, interactive 3D experiences, and gamified user engagement.
+Inspired by Apple's product launches, BRÍK delivers an unforgettable digital experience featuring interactive Three.js visuals, gamified forging, premium animations, and a personalized ownership journey.
 
 ---
 
-## ✨ Features
+## ✨ Live Experience
 
-### 🎬 Cinematic Product Experience
-- Apple-inspired premium landing page
-- Smooth hero reveal animation
-- GSAP-powered transitions
+🎬 Explore the product like never before.
+
+- Cinematic Hero Reveal
+- Interactive 3D Product Showcase
+- Luxury Storytelling
+- Gamified Forge Experience
+- Premium Reservation Flow
+- Personalized Ownership Certificate
+
+---
+
+# 🚀 Features
+
+## 🎥 Cinematic Landing Experience
+
+- Apple-inspired luxury UI
+- Premium dark aesthetic
+- GSAP-powered animations
 - Scroll-driven storytelling
-- Premium typography
-
-### 🧱 Interactive 3D Experience
-- Real-time Three.js brick rendering
-- Multiple luxury brick editions
-- Inspect Mode
-- Drag-to-rotate interaction
-- X-Ray Mode
-- Dynamic material and color switching
-
-### 🔥 Interactive Forge Lab
-- Multi-stage forging workflow
-- Temperature control slider
-- Compression phase
-- Polishing stage
-- Live 3D feedback
-- Achievement rewards
-
-### 🏆 Gamification
-- Achievement system
-- Toast notifications
-- Founder Mode Easter Egg
-- Confetti celebrations
-
-### 📦 Premium Reservation Experience
-- Reservation workflow
-- Luxury unboxing animation
-- Animated 3D product reveal
-- Personalized ownership certificate
-- Certificate download
-
-### 🎨 Premium UI
-- Apple-inspired design language
-- SF Pro typography
-- Glassmorphism elements
-- Smooth micro-interactions
-- Dynamic accent colors
-- Fully responsive layout
-
-### ⚡ Performance Optimizations
-- Optimized Three.js rendering
-- Visibility-based render loops
-- Intersection Observer optimization
-- Animation throttling
-- Resource cleanup
-- Mobile-friendly interactions
+- Smooth page transitions
+- Animated preloader
+- Scroll progress indicator
+- Dynamic navigation highlighting
 
 ---
 
-## 🛠️ Built With
+## 🧱 Interactive 3D Product
+
+Powered by **Three.js**
+
+- Fully interactive 3D BRÍK
+- Multiple premium editions
+- Dynamic material switching
+- Realistic lighting
+- Smooth floating animation
+- Mouse drag rotation
+- Inspect Mode
+- X-Ray Mode
+- Dynamic edition color system
+
+---
+
+## 🔥 BRÍK Forge Lab
+
+An interactive forging experience where users craft their own BRÍK.
+
+### Stages
+
+🌡 Temperature Calibration
+
+⚙ Compression
+
+✨ Precision Polish
+
+Features
+
+- Live temperature slider
+- Interactive polishing workflow
+- Real-time 3D updates
+- Dynamic material response
+- Progress tracking
+- Completion celebration
+
+---
+
+## 🏆 Achievement System
+
+Unlock premium achievements while exploring the experience.
+
+Achievements include
+
+- 🔍 Inspect Master
+- 🧪 X-Ray Activated
+- 🔥 Maximum Heat
+- ⚒ Forge Complete
+- 👑 Founder Mode
+- 📜 Certificate Approved
+
+Includes
+
+- Animated achievement toasts
+- Celebration effects
+- Confetti
+- Session tracking
+
+---
+
+## 👑 Founder Mode
+
+A hidden Easter Egg.
+
+Discover the secret interaction to unlock an exclusive Founder theme.
+
+---
+
+## 📦 Premium Reservation Experience
+
+The experience doesn't end after clicking Reserve.
+
+Users enjoy a complete ownership journey:
+
+- Reserve Your BRÍK
+- Luxury Unboxing Animation
+- Floating 3D Product Reveal
+- Premium Ownership Confirmation
+- Personalized Ownership Certificate
+- Certificate Download
+
+---
+
+## 📜 Luxury Ownership Certificate
+
+Every reservation generates a personalized premium certificate.
+
+Includes
+
+- Owner name
+- Edition name
+- Unique serial number
+- Issue date
+- Verified ownership
+- BRÍK Atelier approval
+- PNG export
+
+---
+
+## 🎨 Design Highlights
+
+- Apple-inspired typography
+- Luxury UI aesthetics
+- Premium glassmorphism
+- Dynamic accent colors
+- Elegant micro-interactions
+- Premium shadows
+- Soft lighting
+- Smooth easing animations
+
+---
+
+## 📱 Responsive Design
+
+Fully optimized for
+
+- 💻 Desktop
+- 📱 Mobile
+- 📟 Tablet
+
+Touch interactions supported.
+
+---
+
+# ⚡ Performance Optimizations
+
+Built with production-ready practices.
+
+- Optimized Three.js rendering
+- Intersection Observer rendering
+- Visibility-based render loops
+- Animation throttling
+- Proper renderer cleanup
+- Resource disposal
+- Responsive canvas resizing
+- Mobile performance optimizations
+
+---
+
+# 🛠 Tech Stack
 
 - HTML5
 - CSS3
@@ -74,46 +186,106 @@ BRÍK reimagines an ordinary construction brick as a luxury collectible product 
 
 ---
 
-## 🚀 Interactive Journey
+# 🎯 User Journey
 
-1. Cinematic Hero Reveal
-2. Inspect Brick
-3. X-Ray Experience
-4. Forge Lab Workflow
-5. Achievement Unlocks
-6. Reserve Your BRÍK
-7. Luxury Unboxing
-8. Ownership Certificate
+```text
+Landing
+
+↓
+
+Cinematic Hero
+
+↓
+
+Explore Editions
+
+↓
+
+Inspect Mode
+
+↓
+
+X-Ray View
+
+↓
+
+Forge Lab
+
+↓
+
+Achievements
+
+↓
+
+Reserve Your BRÍK
+
+↓
+
+Luxury Unboxing
+
+↓
+
+Ownership Certificate
+
+↓
+
+Download Certificate
+```
 
 ---
 
-## 📱 Responsive
+# 🌟 Why BRÍK?
 
-- Desktop
-- Tablet
-- Mobile
+Rather than showcasing a product, BRÍK creates an emotional ownership journey.
 
----
-
-## ⚙️ Highlights
-
-- Apple-inspired UX
-- Premium animations
-- Interactive storytelling
-- Real-time 3D rendering
-- Gamified experience
-- Luxury product presentation
-- Mobile optimized
-- Production-ready architecture
+Every interaction—from the cinematic reveal to the final ownership certificate—was designed to transform a simple brick into a luxury collectible experience.
 
 ---
 
-## 📸 Preview
+# 📸 Preview
 
-(Add screenshots or GIFs here)
+> Add screenshots or GIFs here.
+
+Example:
+
+- Hero Experience
+- Interactive 3D Brick
+- Forge Lab
+- Reservation Flow
+- Ownership Certificate
 
 ---
 
-## 📄 License
+# 📂 Project Structure
 
-This project was created for educational and portfolio purposes.
+```
+BRIK/
+│
+├── index.html
+├── style.css
+├── app.js
+├── assets/
+├── README.md
+```
+
+---
+
+# 🚀 Future Improvements
+
+- Audio immersion
+- Advanced particle effects
+- More collectible editions
+- Multi-language support
+- WebXR exploration
+
+---
+
+# 👨‍💻 Author
+
+**Mariea Mayen**
+
+UI/UX Designer • Frontend Developer
+
+---
+
+⭐ If you enjoyed this project, consider giving it a star!
