@@ -8,15 +8,15 @@ const EDITIONS = [
     accent:'#C04E2A', bg:'#FDF9F6', mat:{ hex:0x9E3F1F, rough:.75, metal:.05 }, atmo:0x9E3F1F, units:150,
     vitals:[{l:'Origin Element',v:'Iron oxide clay matrix'},{l:'Firing Cycle',v:'1180°C Continual'},{l:'Dry Mass',v:'3.4 KG Nominal'},{l:'Surface Finish',v:'Matte reduction raw'}],
     bars:[{l:'Mineral Density',v:94},{l:'Tactile Texture',v:98},{l:'Thermal Retention',v:91},{l:'Rarity Coefficient',v:72}],
-    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Red clay / Iron oxide'},{l:'Kiln Duration',v:'72hr reduction'},{l:'Current Status',v:'Phase I — 150 units'}]
+    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Red clay / Iron oxide'},{l:'Kiln Duration',v:'72hr reduction'},{l:'Edition Status',v:'150 Units — Verified Edition'}]
   },
   {
-    id:'titan', icon:'⚙️', name:'Titan', sub:'Engineering Grade Silicate', eyebrow:'Precision Over Ornament', tag:'Based on engineering bricks — the strongest edition',
-    desc:'BRÍK Titan is rated to 140N/mm² compressive strength — the highest in the collection. Engineered for those who understand that true luxury is not fragile. The blue-grey manganese surface resists acid, salt, and time with equal indifference.',
+    id:'titan', icon:'⚙️', name:'Titan', sub:'Precision-Forged Silicate', eyebrow:'Precision Over Ornament', tag:'Precision-forged for uncompromising strength',
+    desc:'BRÍK Titan is rated to 140N/mm² compressive strength — the highest in the collection. Crafted for those who understand that true luxury is not fragile. The blue-grey manganese surface resists acid, salt, and time with equal indifference.',
     accent:'#2D5D96', bg:'#F4F7FC', mat:{ hex:0x22446B, rough:.40, metal:.55 }, atmo:0x2D5D96, units:100,
     vitals:[{l:'Origin Element',v:'Manganese heavy clay'},{l:'Firing Cycle',v:'1260°C High Flux'},{l:'Dry Mass',v:'3.8 KG Heavy'},{l:'Surface Finish',v:'Semi-vitrified satin'}],
     bars:[{l:'Mineral Density',v:99},{l:'Tactile Texture',v:45},{l:'Thermal Retention',v:98},{l:'Rarity Coefficient',v:81}],
-    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Manganese / Silicate'},{l:'Kiln Duration',v:'96hr High Pressure'},{l:'Current Status',v:'Phase I — 100 units'}]
+    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Manganese / Silicate'},{l:'Kiln Duration',v:'96hr High Pressure'},{l:'Edition Status',v:'100 Units — Verified Edition'}]
   },
   {
     id:'inferno', icon:'🌋', name:'Inferno', sub:'Refractory Crystalline', eyebrow:'Forged to Withstand the Impossible', tag:'Forged to withstand extreme environments',
@@ -24,7 +24,7 @@ const EDITIONS = [
     accent:'#D34100', bg:'#FFF5F2', mat:{ hex:0x852400, rough:.65, metal:.15 }, atmo:0xD34100, units:80,
     vitals:[{l:'Origin Element',v:'38% Alumina Refractory'},{l:'Firing Cycle',v:'1480°C Hyper Kiln'},{l:'Dry Mass',v:'4.1 KG Ultra'},{l:'Surface Finish',v:'Volcanic crystalline coarse'}],
     bars:[{l:'Mineral Density',v:97},{l:'Tactile Texture',v:100},{l:'Thermal Retention',v:100},{l:'Rarity Coefficient',v:88}],
-    stats:[{l:'Dimension Size',v:'228×114×76mm'},{l:'Raw Material',v:'Alumina / Silica fusion'},{l:'Kiln Duration',v:'Shuttle kiln 1480°C'},{l:'Current Status',v:'Phase I — 80 units'}]
+    stats:[{l:'Dimension Size',v:'228×114×76mm'},{l:'Raw Material',v:'Alumina / Silica fusion'},{l:'Kiln Duration',v:'Shuttle kiln 1480°C'},{l:'Edition Status',v:'80 Units — Verified Edition'}]
   },
   {
     id:'terra', icon:'🌿', name:'Terra', sub:'Eco Reclaimed Mineral', eyebrow:'Reclaimed From Industry', tag:'Eco-inspired, drawn from fly ash minerals',
@@ -32,7 +32,7 @@ const EDITIONS = [
     accent:'#3B6B4C', bg:'#F5FAF6', mat:{ hex:0x264731, rough:.85, metal:.02 }, atmo:0x3B6B4C, units:200,
     vitals:[{l:'Origin Element',v:'Reclaimed bio fly ash'},{l:'Firing Cycle',v:'1050°C Eco Wave'},{l:'Dry Mass',v:'2.9 KG Light'},{l:'Surface Finish',v:'Matte sage mineral pore'}],
     bars:[{l:'Mineral Density',v:92},{l:'Tactile Texture',v:88},{l:'Thermal Retention',v:82},{l:'Rarity Coefficient',v:65}],
-    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Fly ash / Portland Core'},{l:'Kiln Duration',v:'Low-temp 48hr cycle'},{l:'Current Status',v:'Phase I — 200 units'}]
+    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Fly ash / Portland Core'},{l:'Kiln Duration',v:'Low-temp 48hr cycle'},{l:'Edition Status',v:'200 Units — Verified Edition'}]
   },
   {
     id:'monolith', icon:'💎', name:'Monolith', sub:'Golden Core™ Flagship', eyebrow:'The Apex of the Collection', tag:'The flagship luxury edition — Golden Core™',
@@ -40,7 +40,7 @@ const EDITIONS = [
     accent:'#B59424', bg:'#FCFAF2', mat:{ hex:0x806714, rough:.20, metal:.92 }, atmo:0xB59424, units:50,
     vitals:[{l:'Origin Element',v:'Golden Core™ Element alloy'},{l:'Firing Cycle',v:'1400°C Induction'},{l:'Dry Mass',v:'3.6 KG Dense'},{l:'Surface Finish',v:'Aurum mirror matrix'}],
     bars:[{l:'Mineral Density',v:98},{l:'Tactile Texture',v:15},{l:'Thermal Retention',v:95},{l:'Rarity Coefficient',v:100}],
-    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Golden Core™ Specie'},{l:'Kiln Duration',v:'Precision Induction'},{l:'Current Status',v:'Phase I — 50 units only'}]
+    stats:[{l:'Dimension Size',v:'215×102.5×65mm'},{l:'Raw Material',v:'Golden Core™ Specie'},{l:'Kiln Duration',v:'Precision Induction'},{l:'Edition Status',v:'50 Units Only — Verified Edition'}]
   }
 ];
 
@@ -610,10 +610,10 @@ function finishLabWorkflow() {
     t.classList.add('done');
   });
   document.getElementById('lab-payoff').classList.add('open');
-  document.getElementById('lab-instr').textContent = '✦ Matrix Synthesis Complete. Structural token unlocked.';
+  document.getElementById('lab-instr').textContent = '✦ Refinement Complete. Your BRÍK is Crafted & Certified.';
   document.getElementById('h-heat').textContent = 'OPTIMAL';
   document.getElementById('h-heat').style.color = EDITIONS[currentEdition].accent;
-  spawnToast('✦ Forging Complete');
+  spawnToast('✦ Crafted & Certified');
   fireConfetti();
 }
 
@@ -745,6 +745,21 @@ function initScrollRig() {
   });
 }
 
+function syncRendererSizes() {
+  if (cam && ren && wrap) {
+    cam.aspect = wrap.clientWidth / wrap.clientHeight; cam.updateProjectionMatrix();
+    ren.setSize(wrap.clientWidth, wrap.clientHeight);
+  }
+  const labContainer = document.getElementById('lab-container-3d');
+  if (lCam && lRen && labContainer && labContainer.clientWidth > 0 && labContainer.clientHeight > 0) {
+    lCam.aspect = labContainer.clientWidth / labContainer.clientHeight; lCam.updateProjectionMatrix();
+    lRen.setSize(labContainer.clientWidth, labContainer.clientHeight);
+  }
+  const confettiCanvas = document.getElementById('confetti-canvas');
+  if (confettiCanvas) { confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
+  resizeUnboxRenderer();
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   buildLayoutNodes();
   initThreeEngine();
@@ -752,7 +767,17 @@ window.addEventListener('DOMContentLoaded', () => {
   initUnboxScene();
   initRenderVisibilityGates();
   setTimeout(initScrollRig, 150);
-  switchEdition(0);
+
+  // Initialize edition-dependent state (accent color, Spotlight vitals/bars,
+  // Lab labels/materials) immediately for the default edition. switchEdition()
+  // itself is a no-op here since idx already equals currentEdition on first
+  // load, and its animated GSAP transition is reserved for user-driven
+  // changes (it would also spin the hero brick, which we don't want on load) —
+  // so the initial state is applied directly and without animation instead.
+  applyGlobalColors(EDITIONS[currentEdition]);
+  updateSpotlightDOM(EDITIONS[currentEdition]);
+  resetLabWorkstationEngine();
+
   hookInteractiveElements();
   document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
   initPreloader();
@@ -766,18 +791,24 @@ window.addEventListener('DOMContentLoaded', () => {
   initFounderEasterEgg();
   initUnboxAndCertificate();
 
-  window.addEventListener('resize', rafThrottle(() => {
-    if (cam && ren && wrap) {
-      cam.aspect = wrap.clientWidth / wrap.clientHeight; cam.updateProjectionMatrix();
-      ren.setSize(wrap.clientWidth, wrap.clientHeight);
-      const labContainer = document.getElementById('lab-container-3d');
-      lCam.aspect = labContainer.clientWidth / labContainer.clientHeight; lCam.updateProjectionMatrix();
-      lRen.setSize(labContainer.clientWidth, labContainer.clientHeight);
-    }
-    const confettiCanvas = document.getElementById('confetti-canvas');
-    if (confettiCanvas) { confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
-    resizeUnboxRenderer();
-  }));
+  // First-paint sizing can be captured before web fonts finish swapping in
+  // (Google Fonts is loaded with display:swap), which can leave layout-
+  // dependent canvases like #lab-container-3d sized against fallback-font
+  // metrics. Re-sync once fonts are actually ready, and once more on window
+  // 'load' as a defensive safety net, so nothing renders at a stale resolution.
+  requestAnimationFrame(syncRendererSizes);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      syncRendererSizes();
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    });
+  }
+  window.addEventListener('load', () => {
+    syncRendererSizes();
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+  });
+
+  window.addEventListener('resize', rafThrottle(syncRendererSizes));
 });
 
 window.addEventListener('pagehide', () => {
@@ -1165,13 +1196,21 @@ const ACHIEVEMENTS = {
   xray: '✦ Achievement: X-Ray Vision',
   maxheat: '✦ Achievement: Pushed The Kiln',
   forge: '✦ Achievement: Master Forger',
-  reserve: '✦ Achievement: Founding Reserve',
-  certificate: '✦ Achievement: Proof of Ownership',
+  reserve: '✦ Certificate Approved — Founding Reserve',
+  certificate: '✦ Achievement: Verified Ownership',
   founder: '👑 FOUNDER MODE UNLOCKED'
 };
+// In-memory unlock ledger (per page session). Achievements were previously
+// gated behind localStorage, which meant a toast that had ever fired on a
+// given browser would silently never fire again on later visits — making
+// achievements like "Inspect Brick" and "Lab Workstation" look broken during
+// repeat testing/demos. Tracking unlocks in memory instead guarantees every
+// fresh session sees each toast exactly once, which is the correct behavior
+// for a one-page interactive showcase.
+const unlockedAchievements = new Set();
 function unlockAchievement(id) {
-  const key = 'brik_ach_' + id;
-  try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (e) {}
+  if (unlockedAchievements.has(id)) return;
+  unlockedAchievements.add(id);
   spawnToast(ACHIEVEMENTS[id] || '✦ Achievement Unlocked');
 }
 
@@ -1268,12 +1307,36 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
-function drawCertificate(ed, name) {
+// Canvas text needs its webfont already loaded before the draw call, unlike
+// DOM text which reflows automatically — otherwise the certificate briefly
+// (or permanently, on a slow connection) renders in a fallback serif. Every
+// font string below also carries a Georgia/serif fallback so the layout
+// still looks intentional even if the load never resolves.
+let certFontsReady = null;
+function ensureCertFontsLoaded() {
+  if (certFontsReady) return certFontsReady;
+  if (!(window.document && document.fonts && document.fonts.load)) {
+    certFontsReady = Promise.resolve();
+    return certFontsReady;
+  }
+  certFontsReady = Promise.all([
+    document.fonts.load('800 48px "Playfair Display"'),
+    document.fonts.load('700 44px "Playfair Display"'),
+    document.fonts.load('italic 500 17px "Playfair Display"'),
+    document.fonts.load('600 15px "Playfair Display"')
+  ]).catch(() => {});
+  return certFontsReady;
+}
+
+async function drawCertificate(ed, name) {
   const canvas = document.getElementById('cert-canvas');
   const ctx = canvas.getContext('2d');
   const w = canvas.width, h = canvas.height;
   const ink = '#17130f';
   const muted = (a) => `rgba(23,19,15,${a})`;
+  const serif = '"Playfair Display", Georgia, serif';
+
+  await ensureCertFontsLoaded();
 
   // Premium ivory paper base
   ctx.fillStyle = '#FAF6EE';
@@ -1292,7 +1355,7 @@ function drawCertificate(ed, name) {
   ctx.rotate(-12 * Math.PI / 180);
   ctx.textAlign = 'center';
   ctx.fillStyle = hexToRgba(ed.accent, 0.05);
-  ctx.font = '900 220px Georgia, serif';
+  ctx.font = `900 220px ${serif}`;
   ctx.fillText('BRÍK', 0, 70);
   ctx.restore();
 
@@ -1328,38 +1391,49 @@ function drawCertificate(ed, name) {
   ctx.fillStyle = ink;
   ctx.fillText(ed.icon, w / 2, sealY + 12);
 
-  // Title
+  // Title — premium serif
   ctx.fillStyle = ink;
-  ctx.font = '700 48px Georgia, serif';
+  ctx.font = `800 46px ${serif}`;
   ctx.fillText('BRÍK ' + ed.name.toUpperCase(), w / 2, 244);
 
-  ctx.font = '600 15px Inter, sans-serif';
+  ctx.font = '600 14px Inter, sans-serif';
   ctx.fillStyle = muted(0.45);
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '1px';
   ctx.fillText(ed.sub.toUpperCase(), w / 2, 274);
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+
+  // Authenticated Edition badge
+  ctx.font = '700 11px Inter, sans-serif';
+  ctx.fillStyle = ed.accent;
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '2px';
+  ctx.fillText('AUTHENTICATED EDITION  ·  VERIFIED OWNERSHIP', w / 2, 300);
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
   // Ornamental divider
-  const divY = 312;
+  const divY = 326;
   ctx.strokeStyle = ed.accent; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(150, divY); ctx.lineTo(430, divY); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(570, divY); ctx.lineTo(850, divY); ctx.stroke();
   ctx.save(); ctx.translate(w / 2, divY); ctx.rotate(Math.PI / 4);
   ctx.fillStyle = ed.accent; ctx.fillRect(-5, -5, 10, 10); ctx.restore();
 
-  ctx.font = 'italic 400 16px Georgia, serif';
-  ctx.fillStyle = muted(0.5);
-  ctx.fillText('This certifies that', w / 2, 358);
+  ctx.font = `italic 500 17px ${serif}`;
+  ctx.fillStyle = muted(0.55);
+  ctx.fillText('This certifies that', w / 2, 368);
 
-  ctx.font = '700 40px Georgia, serif';
+  // Owner name — premium serif, the visual centerpiece
+  ctx.font = `700 44px ${serif}`;
   ctx.fillStyle = ink;
-  ctx.fillText(name, w / 2, 412);
+  ctx.fillText(name, w / 2, 420);
 
-  ctx.font = 'italic 400 16px Georgia, serif';
-  ctx.fillStyle = muted(0.5);
-  ctx.fillText('holds a confirmed Phase I allocation of structural elemental architecture.', w / 2, 452);
+  ctx.font = `italic 500 17px ${serif}`;
+  ctx.fillStyle = muted(0.55);
+  ctx.fillText('is the verified owner of one Authenticated BRÍK ' + ed.name + ',', w / 2, 456);
+  ctx.fillText('approved and certified by the BRÍK Atelier.', w / 2, 480);
 
   // Hairline above footer
   ctx.strokeStyle = muted(0.1); ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(110, 488); ctx.lineTo(890, 488); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(110, 508); ctx.lineTo(890, 508); ctx.stroke();
 
   const serial = 'BRK-' + ed.id.slice(0, 3).toUpperCase() + '-' + Math.floor(100000 + Math.random() * 899999);
   const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -1367,27 +1441,28 @@ function drawCertificate(ed, name) {
   // Dashed ticket-stub divider
   ctx.save();
   ctx.strokeStyle = hexToRgba(ed.accent, 0.4); ctx.lineWidth = 1; ctx.setLineDash([4, 5]);
-  ctx.beginPath(); ctx.moveTo(w / 2, 506); ctx.lineTo(w / 2, 572); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(w / 2, 524); ctx.lineTo(w / 2, 578); ctx.stroke();
   ctx.restore();
 
   ctx.textAlign = 'left';
   ctx.font = '700 12px Inter, sans-serif';
   ctx.fillStyle = ed.accent;
   if ('letterSpacing' in ctx) ctx.letterSpacing = '2px';
-  ctx.fillText('SERIAL', 150, 526);
+  ctx.fillText('SERIAL', 150, 542);
   ctx.textAlign = 'right';
-  ctx.fillText('ISSUED', w - 150, 526);
+  ctx.fillText('ISSUED', w - 150, 542);
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
-  ctx.fillStyle = ink; ctx.font = '600 19px Georgia, serif';
-  ctx.textAlign = 'left'; ctx.fillText(serial, 150, 554);
-  ctx.textAlign = 'right'; ctx.fillText(dateStr, w - 150, 554);
+  // Minimal, refined values — sans-serif for a clean Apple-like finish
+  ctx.fillStyle = ink; ctx.font = '600 18px Inter, sans-serif';
+  ctx.textAlign = 'left'; ctx.fillText(serial, 150, 568);
+  ctx.textAlign = 'right'; ctx.fillText(dateStr, w - 150, 568);
 
   ctx.textAlign = 'center';
   ctx.font = '700 12px Inter, sans-serif';
-  ctx.fillStyle = muted(0.4);
+  ctx.fillStyle = muted(0.45);
   if ('letterSpacing' in ctx) ctx.letterSpacing = '1.5px';
-  ctx.fillText('BRÍK ARCHITECTURAL SYSTEMS ENGINE — PHASE I PRODUCTION', w / 2, h - 48);
+  ctx.fillText('CRAFTED & CERTIFIED  ·  APPROVED BY BRÍK ATELIER', w / 2, h - 48);
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 }
 
