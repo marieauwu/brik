@@ -282,7 +282,7 @@ BRIK/
 
 # 👨‍💻 Author
 
-**Mariea Mayen**
+**Mariea**
 
 UI/UX Designer • Frontend Developer
 
