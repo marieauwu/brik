@@ -42,9 +42,19 @@
 
   <div id="three-wrap"></div>
   <div id="inspect-hud">
-    <div id="inspect-hint">Drag to orbit</div>
+    <div id="inspect-hint">Drag to orbit — scroll to zoom</div>
     <button id="xray-toggle" class="ghost-btn">✕-Ray Reveal</button>
     <button id="inspect-exit" class="ghost-btn">Exit Inspect</button>
+  </div>
+
+  <div id="inspect-hotspots">
+    <div class="hotspot" data-hot="0"><span class="hotspot-dot"></span></div>
+    <div class="hotspot" data-hot="1"><span class="hotspot-dot"></span></div>
+    <div class="hotspot" data-hot="2"><span class="hotspot-dot"></span></div>
+    <div id="hotspot-tip">
+      <div id="hotspot-tip-label"></div>
+      <div id="hotspot-tip-val"></div>
+    </div>
   </div>
 
   <section id="stage">

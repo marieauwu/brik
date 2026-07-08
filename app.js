@@ -1,6 +1,4 @@
-// ═══════════════════════════════════════════════════════════
-// ARCHITECTURAL CORE DATA ENGINE
-// ═══════════════════════════════════════════════════════════
+
 const EDITIONS = [
   {
     id:'heritage', icon:'🔥', name:'Heritage', sub:'Classic Burnt Clay', eyebrow:'Est. Tradition — Reborn', tag:'Inspired by classic burnt clay bricks',
@@ -54,9 +52,6 @@ function applyGlobalColors(ed) {
   document.getElementById('cursor-ring').style.borderColor = ed.accent;
 }
 
-// ═══════════════════════════════════════════════════════════
-// ADVANCED MOUSE CURSOR DETECTOR & PARTICLE STREAM
-// ═══════════════════════════════════════════════════════════
 const cDot = document.getElementById('cursor-dot');
 const cRing = document.getElementById('cursor-ring');
 const curCanvas = document.getElementById('cursor-canvas');
@@ -125,9 +120,6 @@ function hookInteractiveElements() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// HIGH FIDELITY THREE.JS VIEWPORT SCENE MATRIX (3D MODEL)
-// ═══════════════════════════════════════════════════════════
 let scene, cam, ren, brickMesh, particleSystem;
 let heroScrollRotTween = null;
 let targetRotX = 0, targetRotY = 0, currentRotX = 0, currentRotY = 0;
@@ -213,6 +205,9 @@ function initThreeEngine() {
       brickMesh.rotation.y = currentRotY;
       brickMesh.rotation.z = currentRotY * 0.15;
     }
+    if (inspecting && brickMesh) {
+      updateInspectFrame();
+    }
     
     if(particleSystem) {
       const arr = particleSystem.geometry.attributes.position.array;
@@ -241,11 +236,10 @@ function transition3DBrick(ed) {
   gsap.to(brickMesh.material, { roughness: m.rough, metalness: m.metal, duration: 0.8 });
   gsap.to(particleSystem.material.color, { r: ((ed.atmo >> 16) & 0xff) / 255, g: ((ed.atmo >> 8) & 0xff) / 255, b: (ed.atmo & 0xff) / 255, duration: 0.8 });
   gsap.to(brickMesh.rotation, { y: brickMesh.rotation.y + Math.PI * 0.5, duration: 0.6, ease: 'power2.out' });
+  if (rimMesh) gsap.to(rimMesh.material.color, { r: ((ed.atmo >> 16) & 0xff) / 255, g: ((ed.atmo >> 8) & 0xff) / 255, b: (ed.atmo & 0xff) / 255, duration: 0.8 });
 }
 
-// ═══════════════════════════════════════════════════════════
-// LIGHT ACCENT CANVAS PARTICLES
-// ═══════════════════════════════════════════════════════════
+
 const aCanvas = document.getElementById('atmo-canvas');
 const ax = aCanvas ? aCanvas.getContext('2d') : null;
 let atmoParticles = [];
@@ -282,9 +276,6 @@ if (aCanvas) { for (let i = 0; i < 40; i++) { const p = new AtmoParticle(); p.li
   atmoParticles.forEach(p=>{p.update(); p.draw();});
 })();
 
-// ═══════════════════════════════════════════════════════════
-// NAVIGATION THEME UPDATE CONFIGURATION
-// ═══════════════════════════════════════════════════════════
 let activeSwitchSequence = false;
 function switchEdition(idx) {
   if (activeSwitchSequence || idx === currentEdition) return;
@@ -333,9 +324,6 @@ function updateSpotlightDOM(ed) {
   setTimeout(() => { document.querySelectorAll('.sp-bar-fill').forEach(f => { f.style.width = f.dataset.v + '%'; }); }, 50);
 }
 
-// ═══════════════════════════════════════════════════════════
-// ENHANCED LAB WORKSTATION ENGINE (3D INTERACTIVE MINIGAME)
-// ═══════════════════════════════════════════════════════════
 let lScene, lCam, lRen, lBrickMesh, lCoreMesh, debrSystem;
 let labInView = false;
 let gameStagePhase = 0, stageProgressArray = [0, 0, 0], absoluteScore = 0, dynamicCombo = 1, gameCompleteState = false;
@@ -617,9 +605,6 @@ function finishLabWorkflow() {
   fireConfetti();
 }
 
-// ═══════════════════════════════════════════════════════════
-// CORE LAYOUT LIFECYCLE INITIALIZER
-// ═══════════════════════════════════════════════════════════
 function buildLayoutNodes() {
   const dotsWrapper = document.getElementById('edition-dots');
   const standardGrid = document.getElementById('editions-grid');
@@ -688,8 +673,6 @@ const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }); 
 }, { threshold: 0.1 });
 
-// Throttles a handler to run at most once per animation frame, coalescing
-// rapid-fire native events (scroll/resize) without changing the final result.
 function rafThrottle(fn) {
   let ticking = false;
   return function (...args) {
@@ -699,10 +682,6 @@ function rafThrottle(fn) {
   };
 }
 
-// Pause the hero/lab/atmo render loops while their canvases are scrolled
-// out of view — they're already visually hidden in those states (covered
-// by later opaque sections, or off-screen), so this only skips wasted
-// per-frame GPU/CPU work and never changes what's rendered when visible.
 function initRenderVisibilityGates() {
   const stageEl = document.getElementById('stage');
   if (stageEl) {
@@ -768,12 +747,6 @@ window.addEventListener('DOMContentLoaded', () => {
   initRenderVisibilityGates();
   setTimeout(initScrollRig, 150);
 
-  // Initialize edition-dependent state (accent color, Spotlight vitals/bars,
-  // Lab labels/materials) immediately for the default edition. switchEdition()
-  // itself is a no-op here since idx already equals currentEdition on first
-  // load, and its animated GSAP transition is reserved for user-driven
-  // changes (it would also spin the hero brick, which we don't want on load) —
-  // so the initial state is applied directly and without animation instead.
   applyGlobalColors(EDITIONS[currentEdition]);
   updateSpotlightDOM(EDITIONS[currentEdition]);
   resetLabWorkstationEngine();
@@ -791,11 +764,6 @@ window.addEventListener('DOMContentLoaded', () => {
   initFounderEasterEgg();
   initUnboxAndCertificate();
 
-  // First-paint sizing can be captured before web fonts finish swapping in
-  // (Google Fonts is loaded with display:swap), which can leave layout-
-  // dependent canvases like #lab-container-3d sized against fallback-font
-  // metrics. Re-sync once fonts are actually ready, and once more on window
-  // 'load' as a defensive safety net, so nothing renders at a stale resolution.
   requestAnimationFrame(syncRendererSizes);
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
@@ -828,9 +796,6 @@ window.addEventListener('pagehide', () => {
   lRen?.dispose();
   unboxRen?.dispose();
 });
-// ═══════════════════════════════════════════════════════════
-// UNBOXING 3D BRICK PREVIEW (mirrors the hero/lab brick, scaled down)
-// ═══════════════════════════════════════════════════════════
 let unboxScene, unboxCam, unboxRen, unboxBrickMesh;
 let unboxInView = false;
 
@@ -880,9 +845,6 @@ function resizeUnboxRenderer() {
   unboxRen.setSize(w, h);
 }
 
-// ═══════════════════════════════════════════════════════════
-// PRELOADER
-// ═══════════════════════════════════════════════════════════
 function initPreloader() {
   const pre = document.getElementById('preloader');
   if (!pre) return;
@@ -906,11 +868,6 @@ function initPreloader() {
     setTimeout(() => { pre.classList.add('done'); playHeroCinematic(); }, 300);
   }
 
-  // Single source of truth: the bar eases toward 90% as a visual placeholder
-  // while real assets load, then only jumps to 100% and completes once the
-  // window 'load' event confirms the app is actually ready. The tick rate
-  // (260ms) is kept slower than the fill's own CSS transition (250ms) so the
-  // bar doesn't restart its transition mid-animation and stutter.
   const tick = setInterval(() => {
     const ceiling = pageLoaded ? 100 : 90;
     setProgress(Math.min(p + Math.random() * 14, ceiling));
@@ -919,14 +876,9 @@ function initPreloader() {
 
   window.addEventListener('load', () => { pageLoaded = true; });
 
-  // Safety net: if 'load' is unusually slow or never fires, don't trap the
-  // user behind the preloader forever.
   setTimeout(() => { pageLoaded = true; }, 4000);
 }
 
-// ═══════════════════════════════════════════════════════════
-// SCROLL PROGRESS BAR + SCROLLSPY NAVIGATION
-// ═══════════════════════════════════════════════════════════
 function initScrollProgressAndSpy() {
   const fillBar = document.getElementById('scroll-progress-fill');
   const sections = ['stage', 'spotlight', 'lab', 'collection', 'reserve'].map(id => document.getElementById(id)).filter(Boolean);
@@ -950,9 +902,6 @@ function initScrollProgressAndSpy() {
   onScroll();
 }
 
-// ═══════════════════════════════════════════════════════════
-// SCROLL CUE FADE
-// ═══════════════════════════════════════════════════════════
 function initScrollCue() {
   const cue = document.getElementById('scroll-cue');
   if (!cue) return;
@@ -962,9 +911,6 @@ function initScrollCue() {
   cue.addEventListener('click', () => document.getElementById('spotlight').scrollIntoView({ behavior: 'smooth' }));
 }
 
-// ═══════════════════════════════════════════════════════════
-// MAGNETIC BUTTON ATTRACTION
-// ═══════════════════════════════════════════════════════════
 function initMagneticElements() {
   const targets = document.querySelectorAll('.arr, .claim-cta, .submit-btn, .logo, .ed-cta');
   targets.forEach(el => {
@@ -981,9 +927,6 @@ function initMagneticElements() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// 3D TILT ON COLLECTION CARDS
-// ═══════════════════════════════════════════════════════════
 function initCardTilt() {
   document.querySelectorAll('.ed-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -998,9 +941,6 @@ function initCardTilt() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// KEYBOARD NAVIGATION FOR EDITIONS
-// ═══════════════════════════════════════════════════════════
 function initKeyboardNav() {
   window.addEventListener('keydown', (e) => {
     if (window.scrollY > window.innerHeight * 1.2) return;
@@ -1009,9 +949,6 @@ function initKeyboardNav() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// ACHIEVEMENT TOAST SYSTEM
-// ═══════════════════════════════════════════════════════════
 function spawnToast(msg) {
   const stack = document.getElementById('toast-stack');
   if (!stack) return;
@@ -1024,9 +961,6 @@ function spawnToast(msg) {
   gsap.to(chip, { opacity: 0, x: 30, duration: 0.4, delay: 2.2, onComplete: () => chip.remove() });
 }
 
-// ═══════════════════════════════════════════════════════════
-// CONFETTI BURST (celebratory micro-interaction)
-// ═══════════════════════════════════════════════════════════
 function fireConfetti() {
   const canvas = document.getElementById('confetti-canvas');
   if (!canvas) return;
@@ -1064,9 +998,6 @@ function fireConfetti() {
     else ctx.clearRect(0, 0, canvas.width, canvas.height);
   })();
 }
-// ═══════════════════════════════════════════════════════════
-// 1. CINEMATIC HERO REVEAL
-// ═══════════════════════════════════════════════════════════
 let heroCinematicPlayed = false;
 function playHeroCinematic() {
   if (heroCinematicPlayed) return;
@@ -1084,20 +1015,196 @@ function playHeroCinematic() {
     .fromTo('#scroll-cue', { opacity: 0 }, { opacity: 0.5, duration: 0.6 }, 1.2);
 }
 
-// ═══════════════════════════════════════════════════════════
-// 2. INSPECT MODE + X-RAY REVEAL
-// ═══════════════════════════════════════════════════════════
 let inspecting = false, xrayOn = false;
 let xrayCoreMesh = null;
+let xrayWireMesh = null, xrayParticles = null, xrayScanMesh = null;
+let xrayTimeline = null;
 let inspectDragging = false, inspectLastX = 0, inspectLastY = 0;
 let inspectRotY = 0, inspectRotX = 0;
+let inspectVelY = 0, inspectVelX = 0;
+let inspectZoomTarget = 6.2;
+const INSPECT_ZOOM_MIN = 2.6, INSPECT_ZOOM_MAX = 6.4;
+
+let inspectLight = null;       
+let inspectRimLight = null;    
+let inspectSpecular = null;
+let inspectSpecularTarget = null;
+let inspectMoveKeyX = null, inspectMoveKeyY = null;
+let inspectMoveRimX = null, inspectMoveRimY = null, inspectMoveRimZ = null;
+let inspectLightTargetX = 0, inspectLightTargetY = 0.6;
+const inspectRaycaster = new THREE.Raycaster();
+const inspectPointerNDC = new THREE.Vector2();
+const inspectSpecularPosTarget = new THREE.Vector3(0, 0.6, 3.2);
+const inspectSpecularAimTarget = new THREE.Vector3(0, 0, 0.26);
+let inspectSpecularVisible = false;
+let rimMesh = null;
 
 function buildXrayCore() {
   if (xrayCoreMesh || !brickMesh) return;
+
   const geo = new THREE.BoxGeometry(1.7, 0.78, 0.5);
-  const mat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, emissive: 0xD4AF37, emissiveIntensity: 0.4, metalness: 0.9, roughness: 0.15, transparent: true, opacity: 0 });
+  const mat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, emissive: 0xD4AF37, emissiveIntensity: 0.4, metalness: 0.9, roughness: 0.15, transparent: true, opacity: 0, depthWrite: false });
   xrayCoreMesh = new THREE.Mesh(geo, mat);
+  xrayCoreMesh.position.set(0, 0, 0);
+  xrayCoreMesh.renderOrder = 1;
   brickMesh.add(xrayCoreMesh);
+
+  const wireGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(2.3, 1.1, 0.72));
+  const wireMat = new THREE.LineBasicMaterial({ color: 0xD4AF37, transparent: true, opacity: 0, depthWrite: false });
+  xrayWireMesh = new THREE.LineSegments(wireGeo, wireMat);
+  xrayWireMesh.renderOrder = 3;
+  brickMesh.add(xrayWireMesh);
+
+  const pCount = 24;
+  const pGeo = new THREE.BufferGeometry();
+  const pPos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount * 3; i += 3) {
+    pPos[i] = (Math.random() - 0.5) * 1.5;
+    pPos[i + 1] = (Math.random() - 0.5) * 0.7;
+    pPos[i + 2] = (Math.random() - 0.5) * 0.42;
+  }
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const pMat = new THREE.PointsMaterial({ color: 0xF3D77A, size: 0.025, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+  xrayParticles = new THREE.Points(pGeo, pMat);
+  xrayParticles.renderOrder = 5;
+  brickMesh.add(xrayParticles);
+
+  const scanGeo = new THREE.PlaneGeometry(2.6, 0.05);
+  const scanMat = new THREE.MeshBasicMaterial({ color: 0xD4AF37, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false });
+  xrayScanMesh = new THREE.Mesh(scanGeo, scanMat);
+  xrayScanMesh.position.y = -0.6;
+  xrayScanMesh.renderOrder = 6;
+  brickMesh.add(xrayScanMesh);
+}
+
+function buildInspectExtras() {
+  if (!brickMesh || !scene) return;
+  if (!rimMesh) {
+    const rimGeo = new THREE.BoxGeometry(2.36, 1.16, 0.78);
+    const atmo = EDITIONS[currentEdition].atmo;
+    const rimMat = new THREE.MeshBasicMaterial({
+      color: atmo, transparent: true, opacity: 0, side: THREE.BackSide,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    rimMesh = new THREE.Mesh(rimGeo, rimMat);
+    brickMesh.add(rimMesh);
+  }
+  if (!inspectLight) {
+    inspectLight = new THREE.SpotLight(0xF3D77A, 0, 10, Math.PI / 5, 0.65, 1.7);
+    inspectLight.position.set(0, 0.6, 3.2);
+    inspectLight.target = brickMesh;
+    scene.add(inspectLight);
+    scene.add(inspectLight.target);
+
+    inspectRimLight = new THREE.PointLight(0xFFE9B5, 0, 3.4, 2.2);
+    inspectRimLight.position.set(0, 0.6, 2.4);
+    scene.add(inspectRimLight);
+
+    inspectMoveKeyX = gsap.quickTo(inspectLight.position, 'x', { duration: 0.55, ease: 'power3' });
+    inspectMoveKeyY = gsap.quickTo(inspectLight.position, 'y', { duration: 0.55, ease: 'power3' });
+    inspectMoveRimX = gsap.quickTo(inspectRimLight.position, 'x', { duration: 0.35, ease: 'power3' });
+    inspectMoveRimY = gsap.quickTo(inspectRimLight.position, 'y', { duration: 0.35, ease: 'power3' });
+    inspectMoveRimZ = gsap.quickTo(inspectRimLight.position, 'z', { duration: 0.35, ease: 'power3' });
+  }
+  if (!inspectSpecular) {
+    inspectSpecular = new THREE.SpotLight(0xFFF7E8, 0, 5.5, Math.PI / 26, 1, 2.1);
+    inspectSpecular.position.copy(inspectSpecularPosTarget);
+    inspectSpecularTarget = new THREE.Object3D();
+    inspectSpecularTarget.position.copy(inspectSpecularAimTarget);
+    inspectSpecular.target = inspectSpecularTarget;
+    scene.add(inspectSpecularTarget);
+    scene.add(inspectSpecular);
+  }
+}
+
+const INSPECT_HOTSPOTS = [
+  { local: new THREE.Vector3(0, 0.55, 0.12), vitalIdx: 0 },
+  { local: new THREE.Vector3(0.95, -0.12, 0.36), vitalIdx: 1 },
+  { local: new THREE.Vector3(-0.65, -0.32, 0.36), vitalIdx: 3 }
+];
+let hotspotEls = [];
+let hotspotTipEl = null;
+
+function buildHotspotDOM() {
+  hotspotEls = Array.from(document.querySelectorAll('#inspect-hotspots .hotspot'));
+  hotspotTipEl = document.getElementById('hotspot-tip');
+  if (!hotspotEls.length || !hotspotTipEl) return;
+  hotspotEls.forEach((el, i) => {
+    const reveal = (ev) => { if (ev) ev.stopPropagation(); showHotspotTip(i, el); };
+    el.addEventListener('pointerenter', reveal);
+    el.addEventListener('click', reveal);
+    el.addEventListener('pointerleave', () => hotspotTipEl.classList.remove('visible'));
+  });
+}
+
+function showHotspotTip(i, el) {
+  const ed = EDITIONS[currentEdition];
+  const vital = ed.vitals[INSPECT_HOTSPOTS[i].vitalIdx];
+  if (!vital || !hotspotTipEl) return;
+  document.getElementById('hotspot-tip-label').textContent = vital.l;
+  document.getElementById('hotspot-tip-val').textContent = vital.v;
+  const r = el.getBoundingClientRect();
+  hotspotTipEl.style.left = (r.left + r.width / 2) + 'px';
+  hotspotTipEl.style.top = r.top + 'px';
+  hotspotTipEl.classList.add('visible');
+}
+
+function updateHotspotPositions() {
+  if (!hotspotEls.length || !brickMesh || !cam || !wrap) return;
+  const rect = wrap.getBoundingClientRect();
+  const worldPos = new THREE.Vector3();
+  hotspotEls.forEach((el, i) => {
+    worldPos.copy(INSPECT_HOTSPOTS[i].local).applyMatrix4(brickMesh.matrixWorld).project(cam);
+    const behind = worldPos.z > 1 || worldPos.z < -1;
+    const sx = (worldPos.x * 0.5 + 0.5) * rect.width + rect.left;
+    const sy = (-worldPos.y * 0.5 + 0.5) * rect.height + rect.top;
+    el.style.left = sx + 'px';
+    el.style.top = sy + 'px';
+    el.classList.toggle('visible', !behind);
+  });
+}
+
+function showHotspots() { hotspotEls.forEach(el => el.classList.add('visible')); }
+function hideHotspots() {
+  hotspotEls.forEach(el => el.classList.remove('visible'));
+  if (hotspotTipEl) hotspotTipEl.classList.remove('visible');
+}
+
+function updateInspectFrame() {
+  if (!inspectDragging) {
+    if (Math.abs(inspectVelY) > 0.00006 || Math.abs(inspectVelX) > 0.00006) {
+      inspectRotY += inspectVelY;
+      inspectRotX += inspectVelX;
+      brickMesh.rotation.y = inspectRotY;
+      brickMesh.rotation.x = inspectRotX;
+    }
+    inspectVelY *= 0.94;
+    inspectVelX *= 0.94;
+  }
+
+  cam.position.z += (inspectZoomTarget - cam.position.z) * 0.09;
+
+  if (inspectSpecular && inspectSpecularTarget) {
+    inspectSpecular.position.lerp(inspectSpecularPosTarget, 0.14);
+    inspectSpecularTarget.position.lerp(inspectSpecularAimTarget, 0.14);
+    const targetIntensity = inspecting && inspectSpecularVisible ? 1.1 : 0;
+    inspectSpecular.intensity += (targetIntensity - inspectSpecular.intensity) * 0.12;
+  }
+
+  if (xrayOn) {
+    if (xrayCoreMesh) xrayCoreMesh.material.emissiveIntensity = 0.4 + Math.sin(Date.now() * 0.004) * 0.25;
+    if (xrayParticles) {
+      const arr = xrayParticles.geometry.attributes.position.array;
+      for (let i = 1; i < arr.length; i += 3) {
+        arr[i] += 0.0018;
+        if (arr[i] > 0.5) arr[i] = -0.5;
+      }
+      xrayParticles.geometry.attributes.position.needsUpdate = true;
+      xrayParticles.rotation.y += 0.002;
+    }
+  }
+
+  updateHotspotPositions();
 }
 
 function initInspectMode() {
@@ -1106,13 +1213,27 @@ function initInspectMode() {
   const xrayBtn = document.getElementById('xray-toggle');
   if (!toggleBtn) return;
   buildXrayCore();
+  buildInspectExtras();
+  buildHotspotDOM();
 
   function enterInspect() {
     inspecting = true; trackingHero = false;
     document.body.classList.add('inspecting');
     if (heroScrollRotTween && heroScrollRotTween.scrollTrigger) heroScrollRotTween.scrollTrigger.disable(false);
     inspectRotY = brickMesh.rotation.y; inspectRotX = brickMesh.rotation.x;
-    gsap.to(cam.position, { z: 4.2, duration: 0.9, ease: 'power2.inOut' });
+    inspectVelY = 0; inspectVelX = 0;
+    inspectZoomTarget = 4.2;
+    buildInspectExtras();
+
+    gsap.timeline({ defaults: { ease: 'power3.inOut' } })
+      .to(cam.position, { x: 0.5, y: 0.18, z: 4.7, duration: 0.5 }, 0)
+      .to(cam.position, { x: 0, y: 0, z: 4.2, duration: 0.7 }, 0.45)
+      .to(cam, { fov: 32, duration: 1.15, onUpdate: () => cam.updateProjectionMatrix() }, 0);
+    if (rimMesh) gsap.to(rimMesh.material, { opacity: 0.45, duration: 0.8, ease: 'power2.out' });
+    if (inspectLight) gsap.to(inspectLight, { intensity: 2.2, duration: 0.8, ease: 'power2.out' });
+    if (inspectRimLight) gsap.to(inspectRimLight, { intensity: 1.1, duration: 0.8, ease: 'power2.out' });
+
+    showHotspots();
     unlockAchievement('inspect');
   }
   function exitInspect() {
@@ -1120,9 +1241,30 @@ function initInspectMode() {
     document.body.classList.remove('inspecting');
     if (heroScrollRotTween && heroScrollRotTween.scrollTrigger) heroScrollRotTween.scrollTrigger.enable(false, false);
     xrayBtn.classList.remove('active');
+    if (xrayTimeline) xrayTimeline.kill();
     if (xrayCoreMesh) gsap.to(xrayCoreMesh.material, { opacity: 0, duration: 0.4 });
-    if (brickMesh) gsap.to(brickMesh.material, { opacity: 1, duration: 0.4, onComplete: () => { brickMesh.material.depthWrite = true; } });
-    gsap.to(cam.position, { z: 6.2, duration: 0.9, ease: 'power2.inOut' });
+    if (xrayWireMesh) gsap.to(xrayWireMesh.material, { opacity: 0, duration: 0.4 });
+    if (xrayParticles) gsap.to(xrayParticles.material, { opacity: 0, duration: 0.3 });
+    if (xrayScanMesh) { gsap.set(xrayScanMesh.material, { opacity: 0 }); gsap.set(xrayScanMesh.position, { y: -0.6 }); }
+    if (brickMesh) gsap.to(brickMesh.material, {
+      opacity: 1, duration: 0.4, onComplete: () => {
+        brickMesh.material.depthWrite = true;
+        brickMesh.material.transparent = false;
+        brickMesh.renderOrder = 0;
+      }
+    });
+    if (rimMesh) gsap.to(rimMesh.material, { opacity: 0, duration: 0.5 });
+    if (inspectLight) gsap.to(inspectLight, { intensity: 0, duration: 0.5 });
+    if (inspectRimLight) gsap.to(inspectRimLight, { intensity: 0, duration: 0.5 });
+    if (inspectSpecular) gsap.to(inspectSpecular, { intensity: 0, duration: 0.5 });
+    inspectSpecularVisible = false;
+
+    inspectZoomTarget = 6.2;
+    gsap.timeline({ defaults: { ease: 'power3.inOut' } })
+      .to(cam.position, { x: 0, y: 0, z: 6.2, duration: 0.9 }, 0)
+      .to(cam, { fov: 36, duration: 0.9, onUpdate: () => cam.updateProjectionMatrix() }, 0);
+
+    hideHotspots();
   }
 
   toggleBtn.addEventListener('click', enterInspect);
@@ -1132,40 +1274,102 @@ function initInspectMode() {
     xrayOn = !xrayOn;
     xrayBtn.classList.toggle('active', xrayOn);
     buildXrayCore();
+    if (xrayTimeline) xrayTimeline.kill();
+
     if (xrayOn) {
       brickMesh.material.transparent = true;
       brickMesh.material.depthWrite = false;
-      brickMesh.renderOrder = 1;
-      xrayCoreMesh.renderOrder = 0;
-      gsap.to(brickMesh.material, { opacity: 0.25, duration: 0.6 });
-      gsap.to(xrayCoreMesh.material, { opacity: 0.95, duration: 0.6 });
+      brickMesh.renderOrder = 2;
+
+      xrayTimeline = gsap.timeline()
+        .set(xrayScanMesh.position, { y: -0.6 })
+        .set([xrayWireMesh.material, xrayParticles.material, xrayCoreMesh.material], { opacity: 0 })
+        .set(xrayScanMesh.material, { opacity: 0.9 })
+        .to(xrayScanMesh.position, { y: 0.6, duration: 0.55, ease: 'power1.inOut' }, 0)
+        .to(xrayScanMesh.material, { opacity: 0, duration: 0.2 }, 0.45)
+        .to(brickMesh.material, { opacity: 0.22, duration: 0.7, ease: 'power2.out' }, 0.35)
+        .to(xrayWireMesh.material, { opacity: 0.5, duration: 0.7, ease: 'power2.out' }, 0.4)
+        .to(xrayCoreMesh.material, { opacity: 0.95, duration: 0.7, ease: 'power2.out' }, 0.45)
+        .to(xrayParticles.material, { opacity: 0.8, duration: 0.6 }, 0.55);
+
       unlockAchievement('xray');
     } else {
-      gsap.to(brickMesh.material, { opacity: 1, duration: 0.6, onComplete: () => { brickMesh.material.depthWrite = true; } });
-      gsap.to(xrayCoreMesh.material, { opacity: 0, duration: 0.6 });
+      xrayTimeline = gsap.timeline()
+        .to(xrayParticles.material, { opacity: 0, duration: 0.3 }, 0)
+        .to(xrayWireMesh.material, { opacity: 0, duration: 0.4 }, 0)
+        .to(xrayCoreMesh.material, { opacity: 0, duration: 0.4 }, 0.05)
+        .set(xrayScanMesh.position, { y: -0.6 })
+        .set(xrayScanMesh.material, { opacity: 0 })
+        .to(brickMesh.material, {
+          opacity: 1, duration: 0.5, onComplete: () => {
+            brickMesh.material.depthWrite = true;
+            brickMesh.material.transparent = false;
+            brickMesh.renderOrder = 0;
+          }
+        }, 0.15);
     }
   });
 
   const wrapEl = document.getElementById('three-wrap');
+
   wrapEl.addEventListener('pointerdown', (e) => {
     if (!inspecting) return;
     inspectDragging = true; inspectLastX = e.clientX; inspectLastY = e.clientY;
+    inspectVelY = 0; inspectVelX = 0;
     if (wrapEl.setPointerCapture) wrapEl.setPointerCapture(e.pointerId);
   });
+
   window.addEventListener('pointermove', (e) => {
-    if (!inspecting || !inspectDragging || !brickMesh) return;
-    inspectRotY += (e.clientX - inspectLastX) * 0.008;
-    inspectRotX += (e.clientY - inspectLastY) * 0.008;
+    if (!inspecting || !brickMesh) return;
+
+    const r = wrapEl.getBoundingClientRect();
+    const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+    const ny = -(((e.clientY - r.top) / r.height) * 2 - 1);
+    inspectLightTargetX = nx * 3.2;
+    inspectLightTargetY = ny * 2.0 + 0.6;
+
+    if (inspectMoveKeyX) inspectMoveKeyX(inspectLightTargetX);
+    if (inspectMoveKeyY) inspectMoveKeyY(inspectLightTargetY);
+    if (inspectMoveRimX) inspectMoveRimX(nx * 1.6);
+    if (inspectMoveRimY) inspectMoveRimY(ny * 1.1 + 0.6);
+    if (inspectMoveRimZ) inspectMoveRimZ(2.2 + Math.abs(nx) * 0.3);
+
+    if (inspectSpecular) {
+      inspectPointerNDC.set(nx, ny);
+      inspectRaycaster.setFromCamera(inspectPointerNDC, cam);
+      const hit = inspectRaycaster.intersectObject(brickMesh, false)[0];
+      if (hit) {
+        const worldNormal = hit.face.normal.clone().transformDirection(brickMesh.matrixWorld).normalize();
+        const viewDir = cam.position.clone().sub(hit.point).normalize();
+        const reflected = viewDir.reflect(worldNormal);
+        inspectSpecularAimTarget.copy(hit.point);
+        inspectSpecularPosTarget.copy(hit.point).addScaledVector(reflected, 2.6);
+        inspectSpecularVisible = true;
+      } else {
+        inspectSpecularVisible = false;
+      }
+    }
+
+    if (!inspectDragging) return;
+    const dx = (e.clientX - inspectLastX) * 0.008;
+    const dy = (e.clientY - inspectLastY) * 0.008;
+    inspectRotY += dx;
+    inspectRotX += dy;
+    inspectVelY = dx; inspectVelX = dy;
     inspectLastX = e.clientX; inspectLastY = e.clientY;
     brickMesh.rotation.y = inspectRotY;
     brickMesh.rotation.x = inspectRotX;
   });
+
   window.addEventListener('pointerup', () => inspectDragging = false);
+
+  wrapEl.addEventListener('wheel', (e) => {
+    if (!inspecting) return;
+    e.preventDefault();
+    inspectZoomTarget = THREE.MathUtils.clamp(inspectZoomTarget + e.deltaY * 0.0018, INSPECT_ZOOM_MIN, INSPECT_ZOOM_MAX);
+  }, { passive: false });
 }
 
-// ═══════════════════════════════════════════════════════════
-// 3. FORGE TEMPERATURE PREVIEW
-// ═══════════════════════════════════════════════════════════
 function initForgeTempPreview() {
   const slider = document.getElementById('forge-temp');
   const readout = document.getElementById('temp-readout');
@@ -1188,9 +1392,6 @@ function initForgeTempPreview() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// 4. ACHIEVEMENT SYSTEM + FOUNDER MODE EASTER EGG
-// ═══════════════════════════════════════════════════════════
 const ACHIEVEMENTS = {
   inspect: '✦ Achievement: Inspector Unlocked',
   xray: '✦ Achievement: X-Ray Vision',
@@ -1200,13 +1401,6 @@ const ACHIEVEMENTS = {
   certificate: '✦ Achievement: Verified Ownership',
   founder: '👑 FOUNDER MODE UNLOCKED'
 };
-// In-memory unlock ledger (per page session). Achievements were previously
-// gated behind localStorage, which meant a toast that had ever fired on a
-// given browser would silently never fire again on later visits — making
-// achievements like "Inspect Brick" and "Lab Workstation" look broken during
-// repeat testing/demos. Tracking unlocks in memory instead guarantees every
-// fresh session sees each toast exactly once, which is the correct behavior
-// for a one-page interactive showcase.
 const unlockedAchievements = new Set();
 function unlockAchievement(id) {
   if (unlockedAchievements.has(id)) return;
@@ -1236,13 +1430,9 @@ function initFounderEasterEgg() {
   });
 }
 
-// hook combo + lab completion into achievements (non-invasive wrap)
 const _origFinishLabWorkflow = finishLabWorkflow;
 finishLabWorkflow = function () { _origFinishLabWorkflow(); unlockAchievement('forge'); };
 
-// ═══════════════════════════════════════════════════════════
-// 5 & 6. LUXURY UNBOXING + OWNERSHIP CERTIFICATE
-// ═══════════════════════════════════════════════════════════
 let lastReservedName = '';
 
 function initUnboxAndCertificate() {
@@ -1307,11 +1497,6 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
-// Canvas text needs its webfont already loaded before the draw call, unlike
-// DOM text which reflows automatically — otherwise the certificate briefly
-// (or permanently, on a slow connection) renders in a fallback serif. Every
-// font string below also carries a Georgia/serif fallback so the layout
-// still looks intentional even if the load never resolves.
 let certFontsReady = null;
 function ensureCertFontsLoaded() {
   if (certFontsReady) return certFontsReady;
@@ -1338,18 +1523,15 @@ async function drawCertificate(ed, name) {
 
   await ensureCertFontsLoaded();
 
-  // Premium ivory paper base
   ctx.fillStyle = '#FAF6EE';
   ctx.fillRect(0, 0, w, h);
 
-  // Soft vignette for depth / lighting
   const vignette = ctx.createRadialGradient(w / 2, h / 2, h * 0.15, w / 2, h / 2, h * 0.75);
   vignette.addColorStop(0, 'rgba(0,0,0,0)');
   vignette.addColorStop(1, 'rgba(0,0,0,0.05)');
   ctx.fillStyle = vignette;
   ctx.fillRect(0, 0, w, h);
 
-  // Faint rotated brand watermark
   ctx.save();
   ctx.translate(w / 2, h / 2);
   ctx.rotate(-12 * Math.PI / 180);
@@ -1359,11 +1541,9 @@ async function drawCertificate(ed, name) {
   ctx.fillText('BRÍK', 0, 70);
   ctx.restore();
 
-  // Outer accent frame + inner hairline
   ctx.strokeStyle = ed.accent; ctx.lineWidth = 2; ctx.strokeRect(30, 30, w - 60, h - 60);
   ctx.strokeStyle = muted(0.12); ctx.lineWidth = 1; ctx.strokeRect(46, 46, w - 92, h - 92);
 
-  // Corner ornament ticks
   ctx.strokeStyle = ed.accent; ctx.lineWidth = 1.5;
   const tick = 22, m = 46;
   [[m, m, 1, 1], [w - m, m, -1, 1], [m, h - m, 1, -1], [w - m, h - m, -1, -1]].forEach(([cx, cy, dx, dy]) => {
@@ -1375,14 +1555,12 @@ async function drawCertificate(ed, name) {
 
   ctx.textAlign = 'center';
 
-  // Eyebrow label
   ctx.fillStyle = ed.accent;
   ctx.font = '700 13px Inter, sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '3px';
   ctx.fillText('CERTIFICATE OF OWNERSHIP', w / 2, 96);
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
-  // Edition emblem seal
   const sealY = 150;
   ctx.beginPath(); ctx.arc(w / 2, sealY, 36, 0, Math.PI * 2);
   ctx.fillStyle = hexToRgba(ed.accent, 0.08); ctx.fill();
@@ -1391,7 +1569,6 @@ async function drawCertificate(ed, name) {
   ctx.fillStyle = ink;
   ctx.fillText(ed.icon, w / 2, sealY + 12);
 
-  // Title — premium serif
   ctx.fillStyle = ink;
   ctx.font = `800 46px ${serif}`;
   ctx.fillText('BRÍK ' + ed.name.toUpperCase(), w / 2, 244);
@@ -1402,14 +1579,12 @@ async function drawCertificate(ed, name) {
   ctx.fillText(ed.sub.toUpperCase(), w / 2, 274);
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
-  // Authenticated Edition badge
   ctx.font = '700 11px Inter, sans-serif';
   ctx.fillStyle = ed.accent;
   if ('letterSpacing' in ctx) ctx.letterSpacing = '2px';
   ctx.fillText('AUTHENTICATED EDITION  ·  VERIFIED OWNERSHIP', w / 2, 300);
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
-  // Ornamental divider
   const divY = 326;
   ctx.strokeStyle = ed.accent; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(150, divY); ctx.lineTo(430, divY); ctx.stroke();
@@ -1421,7 +1596,6 @@ async function drawCertificate(ed, name) {
   ctx.fillStyle = muted(0.55);
   ctx.fillText('This certifies that', w / 2, 368);
 
-  // Owner name — premium serif, the visual centerpiece
   ctx.font = `700 44px ${serif}`;
   ctx.fillStyle = ink;
   ctx.fillText(name, w / 2, 420);
@@ -1431,14 +1605,12 @@ async function drawCertificate(ed, name) {
   ctx.fillText('is the verified owner of one Authenticated BRÍK ' + ed.name + ',', w / 2, 456);
   ctx.fillText('approved and certified by the BRÍK Atelier.', w / 2, 480);
 
-  // Hairline above footer
   ctx.strokeStyle = muted(0.1); ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(110, 508); ctx.lineTo(890, 508); ctx.stroke();
 
   const serial = 'BRK-' + ed.id.slice(0, 3).toUpperCase() + '-' + Math.floor(100000 + Math.random() * 899999);
   const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-  // Dashed ticket-stub divider
   ctx.save();
   ctx.strokeStyle = hexToRgba(ed.accent, 0.4); ctx.lineWidth = 1; ctx.setLineDash([4, 5]);
   ctx.beginPath(); ctx.moveTo(w / 2, 524); ctx.lineTo(w / 2, 578); ctx.stroke();
@@ -1453,7 +1625,6 @@ async function drawCertificate(ed, name) {
   ctx.fillText('ISSUED', w - 150, 542);
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
-  // Minimal, refined values — sans-serif for a clean Apple-like finish
   ctx.fillStyle = ink; ctx.font = '600 18px Inter, sans-serif';
   ctx.textAlign = 'left'; ctx.fillText(serial, 150, 568);
   ctx.textAlign = 'right'; ctx.fillText(dateStr, w - 150, 568);
