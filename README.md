@@ -16,9 +16,6 @@ Rather than selling a product, BRÍK explores how branding, design, storytelling
 
 ## 📸 Preview
 
-```md
-![BRÍK Demo](https://media.tenor.com/mpXj2gYJaEQAAAAj/fortnite-building.gif)
-```
 
 - Hero Experience
 - Interactive Inspect Mode
