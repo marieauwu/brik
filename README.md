@@ -10,13 +10,15 @@ Rather than selling a product, BRÍK explores how branding, design, storytelling
 
 ## ✨ Live Experience
 
-🔗 **Live Demo:** *(Add your deployed website URL here)*
+🔗 **Live Demo:** *[(Add your deployed website URL here)](https://marieauwu.github.io/brik/)*
 
 ---
 
 ## 📸 Preview
 
-> *(Add screenshots or GIFs here)*
+```md
+![BRÍK Demo](https://media.tenor.com/mpXj2gYJaEQAAAAj/fortnite-building.gif)
+```
 
 - Hero Experience
 - Interactive Inspect Mode
