@@ -1,291 +1,285 @@
-# 🧱 BRÍK — Where Earth Meets Luxury
+# 🧱 BRÍK — The Luxury Brick Experience
 
-> **BRÍK** transforms an ordinary construction brick into a premium collectible through cinematic storytelling, immersive 3D interactions, and luxury-inspired design.
+> **A brick is ordinary. BRÍK isn't.**
 
-Inspired by Apple's product launches, BRÍK delivers an unforgettable digital experience featuring interactive Three.js visuals, gamified forging, premium animations, and a personalized ownership journey.
+BRÍK is an Apple-inspired interactive luxury product experience that transforms an everyday brick into an exclusive collectible through cinematic storytelling, immersive 3D interactions, and premium web design.
+
+Rather than selling a product, BRÍK explores how branding, design, storytelling, and user experience can completely redefine the perceived value of something ordinary.
 
 ---
 
 ## ✨ Live Experience
 
-🎬 Explore the product like never before.
+🔗 **Live Demo:** *(Add your deployed website URL here)*
 
-- Cinematic Hero Reveal
-- Interactive 3D Product Showcase
-- Luxury Storytelling
-- Gamified Forge Experience
-- Premium Reservation Flow
-- Personalized Ownership Certificate
+---
+
+## 📸 Preview
+
+> *(Add screenshots or GIFs here)*
+
+- Hero Experience
+- Interactive Inspect Mode
+- X-Ray Visualization
+- Forge Laboratory
+- Reservation Journey
+- Luxury Unboxing
+- Certificate of Ownership
 
 ---
 
 # 🚀 Features
 
-## 🎥 Cinematic Landing Experience
-
-- Apple-inspired luxury UI
-- Premium dark aesthetic
-- GSAP-powered animations
-- Scroll-driven storytelling
-- Smooth page transitions
-- Animated preloader
-- Scroll progress indicator
-- Dynamic navigation highlighting
+## 🎬 Cinematic Storytelling
+- Apple-inspired minimal interface
+- Smooth scrolling experience
+- Premium transitions
+- Dynamic color themes
+- Luxury motion design
 
 ---
 
-## 🧱 Interactive 3D Product
+## 🧱 Interactive 3D BRÍK
 
-Powered by **Three.js**
-
-- Fully interactive 3D BRÍK
-- Multiple premium editions
-- Dynamic material switching
-- Realistic lighting
-- Smooth floating animation
-- Mouse drag rotation
-- Inspect Mode
-- X-Ray Mode
-- Dynamic edition color system
+- Built with Three.js
+- Real-time lighting
+- Dynamic edition switching
+- Interactive rotation
+- Responsive rendering
+- Optimized WebGL performance
 
 ---
 
-## 🔥 BRÍK Forge Lab
+## 🔍 Inspect Mode
 
-An interactive forging experience where users craft their own BRÍK.
+Explore every detail of your BRÍK with a premium inspection experience.
 
-### Stages
+Features include:
 
-🌡 Temperature Calibration
+- Smooth orbit controls
+- Inertia-based movement
+- Mouse-follow lighting
+- Interactive hotspots
+- Smooth zoom
+- Cinematic transitions
 
-⚙ Compression
+---
 
-✨ Precision Polish
+## 💎 X-Ray Experience
 
-Features
+Reveal what's hidden inside.
 
-- Live temperature slider
-- Interactive polishing workflow
-- Real-time 3D updates
-- Dynamic material response
+Includes:
+
+- Animated shell dissolve
+- Glowing golden core
+- Internal particle effects
+- Wireframe transition
+- Scan animation
+- Premium visual effects
+
+---
+
+## 🔨 Forge Laboratory
+
+Build your BRÍK through an interactive workflow.
+
+Stages:
+
+- Heat
+- Compression
+- Hammer
+- Polish
+- Quality Score
+
+Includes:
+
 - Progress tracking
-- Completion celebration
+- Dynamic feedback
+- Achievement unlocks
+- Smooth animations
 
 ---
 
-## 🏆 Achievement System
+## 🏆 Premium Reservation Journey
 
-Unlock premium achievements while exploring the experience.
-
-Achievements include
-
-- 🔍 Inspect Master
-- 🧪 X-Ray Activated
-- 🔥 Maximum Heat
-- ⚒ Forge Complete
-- 👑 Founder Mode
-- 📜 Certificate Approved
-
-Includes
-
-- Animated achievement toasts
-- Celebration effects
-- Confetti
-- Session tracking
-
----
-
-## 👑 Founder Mode
-
-A hidden Easter Egg.
-
-Discover the secret interaction to unlock an exclusive Founder theme.
-
----
-
-## 📦 Premium Reservation Experience
-
-The experience doesn't end after clicking Reserve.
-
-Users enjoy a complete ownership journey:
+Experience ownership through a luxury reservation flow.
 
 - Reserve Your BRÍK
-- Luxury Unboxing Animation
-- Floating 3D Product Reveal
-- Premium Ownership Confirmation
-- Personalized Ownership Certificate
-- Certificate Download
+- Edition selection
+- Premium confirmation
+- Animated success state
 
 ---
 
-## 📜 Luxury Ownership Certificate
+## 📦 Luxury Unboxing
 
-Every reservation generates a personalized premium certificate.
+Open your reserved BRÍK with a cinematic reveal.
 
-Includes
+Features:
 
-- Owner name
-- Edition name
-- Unique serial number
-- Issue date
+- Animated 3D BRÍK
+- Premium presentation
+- Interactive reveal
+- Luxury motion
+
+---
+
+## 📜 Certificate of Ownership
+
+Receive a beautifully designed ownership certificate.
+
+Includes:
+
+- Premium typography
 - Verified ownership
-- BRÍK Atelier approval
-- PNG export
+- Certificate approval
+- Elegant paper aesthetic
+- Download support
 
 ---
 
-## 🎨 Design Highlights
+## 💎 About BRÍK
 
-- Apple-inspired typography
-- Luxury UI aesthetics
-- Premium glassmorphism
-- Dynamic accent colors
-- Elegant micro-interactions
-- Premium shadows
-- Soft lighting
-- Smooth easing animations
+Discover the story behind the concept.
+
+- Glassmorphism design
+- Floating 3D BRÍK
+- Luxury storytelling
+- Interactive CTA
 
 ---
 
-## 📱 Responsive Design
+## 🎮 Gamification
 
-Fully optimized for
+The experience rewards exploration.
 
-- 💻 Desktop
-- 📱 Mobile
-- 📟 Tablet
-
-Touch interactions supported.
+- Achievement system
+- Celebration effects
+- Interactive challenges
+- Premium feedback animations
 
 ---
 
 # ⚡ Performance Optimizations
 
-Built with production-ready practices.
+- Visibility-gated rendering
+- Optimized animation loops
+- Three.js resource cleanup
+- Memory leak prevention
+- Responsive rendering
+- IntersectionObserver optimization
+- requestAnimationFrame throttling
+- Mobile optimization
 
-- Optimized Three.js rendering
-- Intersection Observer rendering
-- Visibility-based render loops
-- Animation throttling
-- Proper renderer cleanup
-- Resource disposal
-- Responsive canvas resizing
-- Mobile performance optimizations
+---
+
+# 📱 Responsive Design
+
+Fully optimized for:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
 
 ---
 
 # 🛠 Tech Stack
 
+### Frontend
+
 - HTML5
-- CSS3
-- JavaScript (ES6+)
 - Tailwind CSS
+- JavaScript (ES6)
+
+### 3D & Animation
+
 - Three.js
 - GSAP
-- ScrollTrigger
+- WebGL
+
+### Design
+
+- Apple-inspired UI
+- Glassmorphism
+- Luxury Design System
+- Responsive Layout
 
 ---
 
-# 🎯 User Journey
+# 🤖 AI Workflow
 
-```text
-Landing
+This project was developed through an iterative AI-assisted workflow using:
 
-↓
+- ChatGPT
+- Claude
 
-Cinematic Hero
+AI was used to assist with:
 
-↓
-
-Explore Editions
-
-↓
-
-Inspect Mode
-
-↓
-
-X-Ray View
-
-↓
-
-Forge Lab
-
-↓
-
-Achievements
-
-↓
-
-Reserve Your BRÍK
-
-↓
-
-Luxury Unboxing
-
-↓
-
-Ownership Certificate
-
-↓
-
-Download Certificate
-```
+- UI refinement
+- Interaction design
+- Three.js implementation
+- Animation logic
+- Performance optimization
+- UX improvements
+- Code review
+- Bug fixing
 
 ---
 
-# 🌟 Why BRÍK?
+# 🎯 Design Philosophy
 
-Rather than showcasing a product, BRÍK creates an emotional ownership journey.
+BRÍK demonstrates how thoughtful design can transform the perception of an ordinary object.
 
-Every interaction—from the cinematic reveal to the final ownership certificate—was designed to transform a simple brick into a luxury collectible experience.
-
----
-
-# 📸 Preview
-
-> Add screenshots or GIFs here.
-
-Example:
-
-- Hero Experience
-- Interactive 3D Brick
-- Forge Lab
-- Reservation Flow
-- Ownership Certificate
+By combining storytelling, interaction, animation, and premium visual design, the experience creates emotional value around something as simple as a brick.
 
 ---
 
 # 📂 Project Structure
 
 ```
-BRIK/
-│
+/
 ├── index.html
 ├── style.css
 ├── app.js
 ├── assets/
-├── README.md
+├── images/
+└── README.md
 ```
 
 ---
 
-# 🚀 Future Improvements
+# 🌟 Lighthouse
 
-- Audio immersion
-- Advanced particle effects
-- More collectible editions
-- Multi-language support
-- WebXR exploration
-
----
-
-# 👨‍💻 Author
-
-**Mariea**
-
-UI/UX Designer • Frontend Developer
+| Metric | Score |
+|---------|------:|
+| Desktop Performance | 97+ |
+| Mobile Performance | 73+ |
+| Accessibility | ✅ |
+| Best Practices | ✅ |
+| SEO | ✅ |
 
 ---
 
-⭐ If you enjoyed this project, consider giving it a star!
+# 👩‍💻 Author
+
+**Mariea **
+
+UI/UX Designer • Frontend Developer • AI Enthusiast
+
+GitHub: *[(Add your GitHub profile)](https://github.com/marieauwu)*
+
+Portfolio: *(Add your portfolio link)*
+
+LinkedIn: *(Add your LinkedIn)*
+
+---
+
+# ⭐ If you enjoyed this project...
+
+Give this repository a ⭐ and explore the BRÍK experience.
+
+---
+
+> **A brick is ordinary. BRÍK isn't.**
