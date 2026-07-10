@@ -269,6 +269,55 @@ section { position: relative; width: 100vw; min-height: 100vh; display: flex; z-
 .submit-btn:hover { background: var(--accent); }
 
 
+#about-brik {
+  background: transparent; border-top: 1px solid var(--border-color); padding: 8% 5%;
+  display: flex; justify-content: center; align-items: center; text-align: center;
+  position: relative; overflow: hidden;
+}
+.about-glow {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 55% 65% at 50% 40%, color-mix(in srgb, var(--accent) 9%, transparent) 0%, transparent 72%);
+  transition: background 0.8s ease;
+}
+.about-box {
+  max-width: 620px; position: relative; z-index: 1;
+  background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color); border-radius: 20px;
+  padding: 3.75rem 3rem; box-shadow: 0 40px 80px rgba(17,17,21,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.about-brick {
+  width: 78px; height: 78px; margin: 0 auto 26px; perspective: 500px;
+  filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--accent) 14%, transparent));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+.about-brick:hover {
+  transform: scale(1.03) rotate(7deg);
+  filter: drop-shadow(0 16px 34px color-mix(in srgb, var(--accent) 32%, transparent));
+}
+.about-divider {
+  width: 80px; height: 1px; margin: 1.5rem auto 1.75rem; border: none;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 55%, var(--border-color)), transparent);
+}
+.about-box h2 {
+  font-family: var(--font-sf); font-weight: 700; font-size: clamp(2rem, 4vw, 2.6rem);
+  margin: 1.4rem 0 0; letter-spacing: var(--track-heading); color: var(--text-dark);
+}
+.about-box p { font-size: 1.05rem; opacity: 0.6; line-height: 1.75; font-weight: 500; margin-bottom: 2.25rem; }
+.about-learn-btn { display: inline-flex; align-items: center; gap: 9px; transition: border-color 0.35s, color 0.35s, box-shadow 0.35s, transform 0.35s; }
+.about-learn-btn svg { width: 14px; height: 14px; transition: transform 0.35s; }
+.about-learn-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.about-learn-btn:hover svg { transform: translateX(6px); }
+.about-badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 2.25rem;
+  font-family: var(--font-sf); font-size: 0.65rem; letter-spacing: var(--track-label); text-transform: uppercase;
+  font-weight: 600; opacity: 0.4; padding: 7px 15px; border: 1px solid var(--border-color); border-radius: 30px;
+}
+.about-badge span { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+
 footer {
   background: rgba(255, 255, 255, 0.82); border-top: 1px solid var(--border-color); padding: 7% 5% 40px 5%;
   font-size: 0.9rem; z-index: 3; position: relative; overflow: hidden;
@@ -596,6 +645,8 @@ body.founder-mode header { box-shadow: 0 0 30px rgba(212,175,55,0.25); }
   #editions-grid { grid-template-columns: 1fr; }
 
   footer { padding-top: 18%; }
+  #about-brik { padding: 14% 6%; }
+  .about-box { padding: 2.75rem 1.75rem; border-radius: 16px; }
   .footer-top { grid-template-columns: 1fr; gap: 44px; padding-bottom: 40px; }
   .footer-brand p { max-width: 100%; }
   .footer-journey p { max-width: 100%; }
