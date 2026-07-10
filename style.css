@@ -281,9 +281,9 @@ section { position: relative; width: 100vw; min-height: 100vh; display: flex; z-
 }
 .about-box {
   max-width: 620px; position: relative; z-index: 1;
-  background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   border: 1px solid var(--border-color); border-radius: 20px;
-  padding: 3.75rem 3rem; box-shadow: 0 40px 80px rgba(17,17,21,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+  padding: 3.75rem 3rem; box-shadow: 0 40px 80px rgba(17,17,21,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
 }
 .about-brick {
   width: 78px; height: 78px; margin: 0 auto 26px; perspective: 500px;
